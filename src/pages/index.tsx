@@ -2,10 +2,16 @@ import Head from "next/head";
 import { Inter } from "@next/font/google";
 import { Input } from "@/components/input";
 import { RvCard } from "@/components/rv-card";
+import { useSearchRentalsQuery } from "@/queries/search-rentals";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const searchRentalsQuery = useSearchRentalsQuery(
+    ["trailer"],
+    "Pinnacles National Park, CA"
+  );
+
   return (
     <>
       <Head>
@@ -16,13 +22,9 @@ export default function Home() {
       </Head>
       <main className="p-5">
         <Input />
-        <RvCard
-          rv={{
-            name: "City Escapes Adventure Van - 2022 Winnebago Solis 59P, Sleeps 4, Hot Shower",
-            primaryImageUrl:
-              "https://res.cloudinary.com/outdoorsy/image/upload/v1655651700/p/rentals/236274/images/lscs5nvjtlgqhor8gwez.jpg",
-          }}
-        />
+        {searchRentalsQuery.data?.map?.((rv) => (
+          <RvCard key={rv.id} rv={rv} />
+        ))}
       </main>
     </>
   );
