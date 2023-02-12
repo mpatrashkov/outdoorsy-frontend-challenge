@@ -17,7 +17,7 @@ export function RvCard(props: RvCardProps) {
         />
       </div>
 
-      <div className="font-semibold">{props.rv.attributes.name}</div>
+      <div className="font-semibold flex-1">{props.rv.attributes.name}</div>
     </div>
   );
 }

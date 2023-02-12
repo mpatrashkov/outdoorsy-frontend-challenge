@@ -20,7 +20,11 @@ function getSearchRentals(keywords: string[], address: string) {
 }
 
 export function useSearchRentalsQuery(keywords: string[], address: string) {
-  return useQuery(["rentals", { keywords, address }], () =>
-    getSearchRentals(keywords, address)
+  return useQuery(
+    ["rentals", { keywords, address }],
+    () => getSearchRentals(keywords, address),
+    {
+      keepPreviousData: true,
+    }
   );
 }
